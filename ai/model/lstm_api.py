@@ -11,7 +11,7 @@ CORS(app)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CSV_FILE = BASE_DIR / "traffic_routes.csv"
+CSV_FILE = BASE_DIR / "dataset" /"traffic_routes.csv"
 MODEL_FILE = BASE_DIR / "model" / "lstm_model.keras"
 SCALER_FILE = BASE_DIR / "model" / "scaler.pkl"
 ENCODER_FILE = BASE_DIR / "model" / "encoders.pkl"

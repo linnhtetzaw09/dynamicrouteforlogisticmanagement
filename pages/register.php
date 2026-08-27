@@ -12,6 +12,23 @@ if (isset($_SESSION['employee_id'])) {
     exit;
 }
 
+require_once '../config/db_config.php';
+
+$sites = [];
+
+$sql = "SELECT site_id, site_name 
+        FROM site 
+        WHERE is_active = 1 
+        ORDER BY site_name ASC";
+
+$result = $conn->query($sql);
+
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $sites[] = $row;
+    }
+}
+
 $page_title = 'Register';
 include '../includes/header.php';
 
@@ -119,13 +136,18 @@ if (isset($_SESSION['registration_errors'])) {
                             <!-- Site Selection -->
                             <div class="form-group mb-3">
                                 <label for="site" class="form-label">Assigned Site</label>
+
                                 <select class="form-select" id="site" name="assigned_site_id" required>
                                     <option value="">-- Select a site --</option>
-                                    <option value="1">Liverpool Hub</option>
-                                    <option value="2">Manchester Distribution Center</option>
-                                    <option value="3">Birmingham Logistics</option>
-                                    <option value="4">London Central</option>
+
+                                    <?php foreach ($sites as $site): ?>
+                                        <option value="<?= htmlspecialchars($site['site_id']) ?>">
+                                            <?= htmlspecialchars($site['site_name']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+
                                 </select>
+
                                 <div class="invalid-feedback">
                                     Please select a site.
                                 </div>

@@ -448,11 +448,58 @@ $sites = $conn->query("SELECT * FROM site WHERE is_active = 1 ORDER BY site_name
                                 </div>
 
                                 <div class="form-group mb-3">
+
                                     <label for="status" class="form-label">Status *</label>
-                                    <select class="form-select" id="status" name="status" required>
-                                        <option value="Outstanding" <?php echo ($job_data && $job_data['status'] === 'Outstanding') ? 'selected' : ''; ?>>Outstanding</option>
-                                        <option value="Completed" <?php echo ($job_data && $job_data['status'] === 'Completed') ? 'selected' : ''; ?>>Completed</option>
+
+                                    <select class="form-select" id="status" name="status" required >
+
+                                        <option
+                                            value="Outstanding"<?php
+                                            echo (
+                                                $job_data &&
+                                                $job_data['status'] === 'Outstanding'
+                                            )
+                                                ? 'selected'
+                                                : '';
+                                            ?>
+                                        >
+                                            Outstanding
+                                        </option>
+
+                                        <option
+                                            value="In Progress"
+                                            <?php
+                                            echo (
+                                                $job_data &&
+                                                $job_data['status'] === 'In Progress'
+                                            )
+                                                ? 'selected'
+                                                : '';
+                                            ?>
+                                        >
+                                            In Progress
+                                        </option>
+
+                                        <option
+                                            value="Completed"
+                                            <?php
+                                            echo (
+                                                $job_data &&
+                                                $job_data['status'] === 'Completed'
+                                            )
+                                                ? 'selected'
+                                                : '';
+                                            ?>
+                                        >
+                                            Completed
+                                        </option>
+
                                     </select>
+
+                                    <div class="invalid-feedback">
+                                        Please select a status.
+                                    </div>
+
                                 </div>
 
                                 <div class="form-group mb-4">
